@@ -16,7 +16,7 @@ resource "null_resource" "provisioner" {
     }
     inline = [
       "sudo pip3.11 install ansible",
-      "ansible-pull -i localhost -U https://github.com/devps23/expense-ansible expense.yml -e env=${var.env} -e component_name=${var.component}"
+      "ansible-pull -i localhost, -U https://github.com/devps23/expense-ansible expense.yml -e env=${var.env} -e component_name=${var.component}"
 
     ]
   }
@@ -27,4 +27,6 @@ resource "aws_route53_record" "route" {
   zone_id = "Z09583601MY3QCL7AJKBT"
   records = [aws_instance.instance.private_ip]
 }
+
+
 
