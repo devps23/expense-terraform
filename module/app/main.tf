@@ -16,7 +16,7 @@ resource "null_resource" "provisioner" {
     }
     inline = [
       "sudo pip3.11 install ansible",
-      "ansible-pull -i frontend-1-dev.pdevops72.online, -U https://github.com/devps23/expense-ansible expense.yml -e env=${var.env} -e component_name=${var.component}"
+      "ansible-pull -i localhost, -U https://github.com/devps23/expense-ansible expense.yml -e env=${var.env} -e component_name=${var.component}"
 
     ]
   }
