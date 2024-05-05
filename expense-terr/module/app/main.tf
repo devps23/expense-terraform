@@ -26,6 +26,7 @@ resource "aws_route53_record" "route" {
   type = "A"
   zone_id = "Z09583601MY3QCL7AJKBT"
   records = [aws_instance.instance.private_ip]
+  ttl = 30
 }
 
 
