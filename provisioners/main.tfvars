@@ -1,4 +1,4 @@
-ami = var.ami
-instance_type = var.instance_type
-ssh_user = var.ssh_user
-ssh_pass = var.ssh_pass
+ami = "ami-090252cbe067a9e58"
+instance_type = "t2.micro"
+ssh_user = "ec2-user"
+ssh_pass = "DevOps321"
