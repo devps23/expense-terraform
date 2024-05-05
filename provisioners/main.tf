@@ -4,17 +4,20 @@ resource "aws_instance" "instance" {
   tags = {
     Name = "demo"
   }
+}
+resource "null_resource" "resource" {
   provisioner "remote-exec" {
     connection {
-      type     = "ssh"
-      user     = var.ssh_user
+      type = "ssh"
+      user = var.ssh_user
       password = var.ssh_pass
-      host     = self.public_ip
+      host = aws_instance.instance.public_ip
     }
     inline = [
-       "sudo dnf install nginx -y"
+      "sudo dnf install nginx -y"
 
     ]
   }
 }
+
 
