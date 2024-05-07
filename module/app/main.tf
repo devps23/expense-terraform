@@ -3,7 +3,9 @@ resource "aws_instance" "instance" {
   instance_type = var.instance_type
   tags = {
     Name = var.component
+    monitor= yes
   }
+
 }
 
 resource "null_resource" "provisioner" {
