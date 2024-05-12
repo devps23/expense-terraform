@@ -23,12 +23,13 @@ resource "aws_instance" "instance" {
 //    Name = var.component
 //  }
 //}
+//here jsondecode to decode the secret credentials from vault server
 resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
-      user     = var.ssh_user
-      password = var.ssh_pass
+      user     =  jsondecode(data.vault_generic_secret.rundeck_auth.data_json).user
+      password =  jsondecode(data.vault_generic_secret.rundeck_auth.data_json).pass
       host     = aws_instance.instance.public_ip
     }
     inline = [

@@ -1,4 +1,4 @@
 variable "instance_type" {}
-variable "ssh_user" {}
-variable "ssh_pass" {}
+//variable "ssh_user" {}
+//variable "ssh_pass" {}
 
