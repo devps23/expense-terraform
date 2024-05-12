@@ -46,6 +46,13 @@ resource "aws_route53_record" "route" {
   records = [aws_instance.instance.private_ip]
   ttl = 30
 }
+resource "aws_route53_record" "route_internal" {
+  name = "${var.component}-${var.env}.pdevops72.online"
+  type = "A"
+  zone_id = "Z09583601MY3QCL7AJKBT"
+  records = [aws_instance.instance.public_ip]
+  ttl = 30
+}
 
 
 
