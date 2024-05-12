@@ -47,7 +47,7 @@ resource "aws_route53_record" "route" {
   ttl = 30
 }
 resource "aws_route53_record" "route_internal" {
-  name = "${var.component}-${var.env}.pdevops72.online"
+  name = "${var.component}-internal.pdevops72.online"
   type = "A"
   zone_id = "Z09583601MY3QCL7AJKBT"
   records = [aws_instance.instance.public_ip]
