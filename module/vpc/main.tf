@@ -13,10 +13,10 @@ resource "aws_vpc" "vpc" {
 //    Name = "frontend-${var.env}-${count.index}-subnet"
 //  }
 //}
-resource "aws_subnet" "frontend" {
-  count             = length(var.frontend_subnets)
+resource "aws_subnet" "backend" {
+  count             = length(var.backend_subnets)
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.frontend_subnets[count.index]
+  cidr_block        = var.backend_subnets[count.index]
 
 
   tags = {
