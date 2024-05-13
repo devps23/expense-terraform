@@ -14,7 +14,7 @@ resource "aws_subnet" "frontend" {
   cidr_block = var.frontend_subnets[count.index]
 
   tags = {
-    Name = "subnet-${var.env}-${count.index}-new"
+    Name = "frontend-${var.env}-${count.index}-subnet"
   }
 }
 // to create subnet in vpc
