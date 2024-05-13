@@ -1,4 +1,4 @@
-output "env" {
-  value = var.env
-}
-variable "env" {}
+//output "env" {
+//  value = var.env
+//}
+//variable "env" {}
