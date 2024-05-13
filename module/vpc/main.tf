@@ -1,13 +1,9 @@
-//to create custom VPC
 resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr_block
   tags = {
     Name = "vpc-${var.env}-new"
   }
 }
-//to create two subnets in vpc
-//to loop two times use count
-//two cidr_blocks(subnets)
 resource "aws_subnet" "frontend" {
   count      = length(var.frontend_subnets)
   vpc_id     = aws_vpc.vpc.id
