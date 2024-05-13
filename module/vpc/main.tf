@@ -25,6 +25,6 @@ resource "aws_vpc_peering_connection" "peer" {
 // peer connection for new routetable
 resource "aws_route" "route" {
   route_table_id            = aws_vpc.vpc.main_route_table_id
-  destination_cidr_block    = var.default_cidr_block
+  destination_cidr_block    = var.default_vpc_cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
 }
