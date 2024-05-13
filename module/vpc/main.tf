@@ -5,15 +5,28 @@ resource "aws_vpc" "vpc" {
     Name = "vpc-${var.env}-new"
   }
 }
-// to create subnet in vpc
-resource "aws_subnet" "main" {
+//to create two subnets in vpc
+//to loop two times use count
+//two cidr_blocks(subnets)
+resource "aws_subnet" "frontend" {
+  count      = length(var.frontend_subnets)
   vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.vpc_cidr_block
+  cidr_block = var.vpc_cidr_block[count.index]
 
   tags = {
-    Name = "subnet-${var.env}-new"
+    Name = "subnet-${var.env}-${count.index}-new"
   }
 }
+// to create subnet in vpc
+//single subnet
+//resource "aws_subnet" "subnet" {
+//  vpc_id     = aws_vpc.vpc.id
+//  cidr_block = var.vpc_cidr_block
+//
+//  tags = {
+//    Name = "subnet-${var.env}-new"
+//  }
+//}
 //peer connection between two vpc id's
 resource "aws_vpc_peering_connection" "peer" {
   peer_vpc_id   = aws_vpc.vpc.id
