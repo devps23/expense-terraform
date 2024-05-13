@@ -28,13 +28,13 @@ resource "aws_subnet" "frontend" {
 //  }
 //}
 //peer connection between two vpc id's
-resource "aws_vpc_peering_connection" "peer" {
-  peer_vpc_id   = aws_vpc.vpc.id
-  vpc_id        = var.default_vpc_id
-  tags = {
-    Name = "peer-${var.env}-new"
-  }
-}
+//resource "aws_vpc_peering_connection" "peer" {
+//  peer_vpc_id   = aws_vpc.vpc.id
+//  vpc_id        = var.default_vpc_id
+//  tags = {
+//    Name = "peer-${var.env}-new"
+//  }
+//}
 // peer connection for new routetable
 //resource "aws_route" "route" {
 //  route_table_id            = aws_vpc.vpc.main_route_table_id
