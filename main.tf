@@ -22,4 +22,5 @@ module "vpc" {
   source = "./module/vpc"
   env = var.env
   vpc_cidr_block = var.cidr_block
+  default_vpc_id = var.default_vpc_id
 }
