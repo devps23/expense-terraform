@@ -27,4 +27,5 @@ module "vpc" {
   backend-subnets = var.backend-subnets
   db-subnets =  var.db-subnets
   default_vpc_id = var.default_vpc_id
+  default_vpc_cidr = var.default_vpc_cidr
 }

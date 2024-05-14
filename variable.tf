@@ -5,6 +5,7 @@ variable "frontend-subnets"{}
 variable "backend-subnets"{}
 variable "db-subnets"{}
 variable "default_vpc_id" {}
+variable "default_vpc_cidr"{}
 
 
 
