@@ -4,15 +4,15 @@ resource "aws_vpc" "vpc" {
     Name = "vpc-${var.env}-new"
   }
 }
-resource "aws_subnet" "frontend" {
-  count      = length(var.frontend_subnets)
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.frontend_subnets[count.index]
-  availability_zone = var.availability_zone[count.index]
-  tags = {
-    Name = "frontend-${var.env}-${count.index}-subnet"
-  }
-}
+//resource "aws_subnet" "frontend" {
+//  count      = length(var.frontend_subnets)
+//  vpc_id     = aws_vpc.vpc.id
+//  cidr_block = var.frontend_subnets[count.index]
+//  availability_zone = var.availability_zone[count.index]
+//  tags = {
+//    Name = "frontend-${var.env}-${count.index}-subnet"
+//  }
+//}
 
 // to create subnet in vpc
 //single subnet
