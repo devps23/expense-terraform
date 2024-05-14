@@ -4,11 +4,12 @@ resource "aws_vpc" "vpc" {
     Name = "vpc-${var.env}-new"
   }
 }
-resource "aws_subnet" "subnet" {
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = aws_vpc.vpc.cidr_block
-  availability_zone = var.availability_zone
+resource "aws_subnet" "frontend" {
+  count             = length(var.frontend-subnets)
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.frontend-subnets[count.index]
+  availability_zone = var.availability_zone[count.index]
   tags = {
-    Name = "subnet-${var.env}-new"
+    Name = "subnet-${var.env}-new-${count.index}"
   }
 }
