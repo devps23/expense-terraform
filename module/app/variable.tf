@@ -3,3 +3,4 @@ variable "component" {}
 variable "env" {}
 variable "vpc" {}
 variable "subnets" {}
+variable "ami" {}

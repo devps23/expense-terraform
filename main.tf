@@ -13,6 +13,7 @@
 //  env = var.env
 //}
 module "mysql" {
+  ami = "ami-090252cbe067a9e58"
   source = "./module/app"
   instance_type = var.instance_type
   component = "mysql"
