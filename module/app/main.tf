@@ -23,8 +23,7 @@ resource "aws_instance" "instance" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.instance_type
   vpc_security_group_ids = [aws_security_group.security.id]
-  for_each = var.subnets
-  subnet_id = each.value[0] + "..." + each.value[1]
+   subnet_id = var.subnets[0]
 
 
   tags = {
