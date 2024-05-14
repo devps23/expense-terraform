@@ -4,6 +4,3 @@ data "aws_ami" "ami" {
   owners           = [973714476881]
 }
 
-data "vault_generic_secret" "rundeck_auth" {
-  path = "expense_cred/ssh"
-}
