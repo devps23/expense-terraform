@@ -37,6 +37,9 @@ resource "aws_subnet" "db" {
 resource "aws_vpc_peering_connection" "peer" {
   peer_vpc_id = var.default_vpc_id
   vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name = "peer-${var.env}-new"
+  }
 }
 resource "aws_route" "entry_route"{
     route_table_id            = aws_vpc.vpc.main_route_table_id
