@@ -236,11 +236,11 @@ secret data : test(user) , test123(password)
       same steps follow for automation
 
 
-curl 'http://54.196.151.46:8153/go/api/admin/encrypt' \
+curl 'http://34.228.142.178:8153/go/api/admin/encrypt' \
 -H 'Accept: application/vnd.go.cd.v1+json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{
-  "value": "hvs.tyEMRhd9Ms8lvUUU1ML0kYtp"
+  "value": "hvs.jUJeWSfOihA8RVtnhx9FbHLi"
 }'
 "AES:78UxNlQWrxlX9qvpkpZPCg==:SeQ7Y1aZt/qm0SHHrJWo5pbcYrronmIYp4SUo8l5Fdo="
 
@@ -252,5 +252,8 @@ hvs.jUJeWSfOihA8RVtnhx9FbHLi
 
 Key 1
 2KAquvzgy5ALTSmLfBNza6ZFfbzE5qs31C+Stm25Ask=
+
+ "AES:SUjTbDfiAUTVz96BzdU0Mw==:c3DhvBk5xFFfw+d0TaZI5lvM8qD+Cb/jvLirOwgeNqM="
+
 
 
