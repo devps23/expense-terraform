@@ -7,5 +7,5 @@ default_route_table_id = "rtb-0a2e9ff93585c96fd"
 frontend-subnets = ["10.10.0.0/20","10.10.16.0/20"]
 //backend-subnets = ["10.10.32.0/20","10.10.48.0/20"]
 //mysql-subnets = ["10.10.64.0/20","10.10.80.0/20"]
-availability_zone = ["us-east-1a","us-east-1b"]
+availability_zone = "us-east-1a"
 
