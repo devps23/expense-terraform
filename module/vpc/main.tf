@@ -4,26 +4,26 @@ resource "aws_vpc" "vpc" {
     Name = "vpc-${var.env}-new"
   }
 }
-resource "aws_subnet" "frontend" {
-  count      = length(var.frontend_subnets)
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = var.vpc_cidr_block
-  availability_zone = var.availability_zone[count.index]
-  tags = {
-    Name = "${var.env}-frontend-subnet-${count.index + 1}"
-  }
-}
+//resource "aws_subnet" "frontend" {
+//  count      = length(var.frontend_subnets)
+//  vpc_id     = aws_vpc.vpc.id
+//  cidr_block = var.vpc_cidr_block
+//  availability_zone = var.availability_zone[count.index]
+//  tags = {
+//    Name = "${var.env}-frontend-subnet-${count.index + 1}"
+//  }
+//}
 
 // to create subnet in vpc
 //single subnet
-//resource "aws_subnet" "subnet" {
-//  vpc_id     = aws_vpc.vpc.id
-//  cidr_block = var.vpc_cidr_block
-//
-//  tags = {
-//    Name = "subnet-${var.env}-new"
-//  }
-//}
+resource "aws_subnet" "subnet" {
+  vpc_id     = aws_vpc.vpc.id
+  cidr_block = var.vpc_cidr_block
+
+  tags = {
+    Name = "subnet-${var.env}-new"
+  }
+}
 //peer connection between two vpc id's
 //resource "aws_vpc_peering_connection" "peer" {
 //  peer_vpc_id   = aws_vpc.vpc.id
