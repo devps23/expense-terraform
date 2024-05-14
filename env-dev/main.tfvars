@@ -1,4 +1,5 @@
 env = "dev"
+instance_type = "t2.micro"
 vpc_cidr_block = "10.10.0.0/24"
 subnet_cidr_block = "10.10.0.0/24"
 frontend-subnets = ["10.10.0.0/27","10.10.0.32/27"]
