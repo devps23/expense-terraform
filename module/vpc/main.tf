@@ -39,9 +39,14 @@ resource "aws_vpc_peering_connection" "peer" {
   vpc_id = aws_vpc.vpc.id
 }
 resource "aws_route" "entry_route"{
-  count = length(var.frontend-subnets)
-  route_table_id            = aws_vpc.vpc.main_route_table_id[count.index]
+    route_table_id            = aws_vpc.vpc.main_route_table_id
   destination_cidr_block    = var.default_vpc_cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
+
+}
+resource "aws_route" "entry_route_default"{
+  route_table_id            = var.default-route-table-id
+  destination_cidr_block    = aws_vpc.vpc.cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
 
 }

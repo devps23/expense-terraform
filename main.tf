@@ -28,4 +28,5 @@ module "vpc" {
   db-subnets =  var.db-subnets
   default_vpc_id = var.default_vpc_id
   default_vpc_cidr = var.default_vpc_cidr
+  default_route-table_id = var.default_route-table_id
 }
