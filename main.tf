@@ -24,4 +24,6 @@ module "vpc" {
   vpc_cidr_block = var.vpc_cidr_block
   availability_zone = var.availability_zone
   frontend-subnets = var.frontend-subnets
+  backend-subnets = var.backend-subnets
+  db-subnets =  var.db-subnets
 }
