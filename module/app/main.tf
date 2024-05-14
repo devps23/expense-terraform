@@ -39,6 +39,19 @@ resource "aws_instance" "component" {
 resource "aws_instance" "instance"{
   ami = var.ami
   instance_type = var.instance_type
+  vpc_security_group_ids = [aws_security_group.security.id]
+  //subnet_id = var.subnets[0]
+  instance_market_options {
+    market_type = "spot"
+    spot_options {
+      instance_interruption_behavior = "stop"
+      spot_instance_type             = "persistent"
+    }
+  }
+  tags = {
+    Name = "duplicate"
+    monitor= "yes"
+  }
 }
 
 //here jsondecode to decode the secret credentials from vault server
