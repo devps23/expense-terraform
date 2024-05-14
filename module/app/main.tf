@@ -23,9 +23,7 @@ resource "aws_instance" "instance" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.instance_type
   vpc_security_group_ids = [aws_security_group.security.id]
-   subnet_id = var.subnets[0]
-
-
+   //subnet_id = var.subnets[0]
   tags = {
     Name = var.component
     monitor= "yes"
@@ -64,13 +62,6 @@ resource "aws_instance" "instance" {
 //    ]
 //  }
 //}
-resource "aws_route53_record" "route" {
-  name = "${var.component}-${var.env}.pdevops72.online"
-  type = "A"
-  zone_id = "Z09583601MY3QCL7AJKBT"
-  records = [aws_instance.instance.private_ip]
-  ttl = 30
-}
 resource "aws_route53_record" "route_internal" {
   name = "${var.component}-internal.pdevops72.online"
   type = "A"
@@ -78,6 +69,14 @@ resource "aws_route53_record" "route_internal" {
   records = [aws_instance.instance.public_ip]
   ttl = 30
 }
+resource "aws_route53_record" "route" {
+  name = "${var.component}-${var.env}.pdevops72.online"
+  type = "A"
+  zone_id = "Z09583601MY3QCL7AJKBT"
+  records = [aws_instance.instance.private_ip]
+  ttl = 30
+}
+
 
 
 
