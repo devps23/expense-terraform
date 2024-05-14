@@ -39,7 +39,6 @@ resource "aws_instance" "component" {
 resource "aws_instance" "instance"{
   ami = var.ami
   instance_type = var.instance_type
-  vpc_security_group_ids = [aws_security_group.security.id]
   //subnet_id = var.subnets[0]
   instance_market_options {
     market_type = "spot"
