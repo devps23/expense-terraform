@@ -23,7 +23,6 @@ module "mysql" {
 module "vpc" {
   source = "./module/vpc"
   env = var.env
-  instance_type= var.instance_type
   vpc_cidr_block = var.vpc_cidr_block
   availability_zone = var.availability_zone
   frontend-subnets = var.frontend-subnets
