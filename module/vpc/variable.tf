@@ -6,4 +6,4 @@ variable "backend-subnets"{}
 variable "db-subnets"{}
 variable "default_vpc_id"{}
 variable "default_vpc_cidr" {}
-variable "default-route-table-id"{}
+variable "default_route-table_id"{}
