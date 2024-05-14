@@ -244,4 +244,13 @@ curl 'http://54.196.151.46:8153/go/api/admin/encrypt' \
 }'
 "AES:78UxNlQWrxlX9qvpkpZPCg==:SeQ7Y1aZt/qm0SHHrJWo5pbcYrronmIYp4SUo8l5Fdo="
 
+14/05
+
+Initial root token
+hvs.jUJeWSfOihA8RVtnhx9FbHLi
+
+
+Key 1
+2KAquvzgy5ALTSmLfBNza6ZFfbzE5qs31C+Stm25Ask=
+
 
