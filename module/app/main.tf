@@ -23,29 +23,20 @@ resource "aws_instance" "instance" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.instance_type
   vpc_security_group_ids = [aws_security_group.security.id]
-   //subnet_id = var.subnets[0]
+     //subnet_id = var.subnets[0]
   tags = {
     Name = var.component
     monitor= "yes"
   }
-  instance_market_options {
-    market_type = "spot"
-    spot_options {
-      instance_interruption_behavior = "stop"
-      spot_instance_type             = "persistent"
-    }
-  }
-}
-//resource "aws_spot_instance_request" "spot_instances" {
-//  ami           = data.aws_ami.ami.image_id
-//  instance_type = var.instance_type
-//  spot_type = "persistent"
-//  instance_interruption_behavior = "stop"
-//
-//  tags = {
-//    Name = var.component
+//  instance_market_options {
+//    market_type = "spot"
+//    spot_options {
+//      instance_interruption_behavior = "stop"
+//      spot_instance_type             = "persistent"
+//    }
 //  }
-//}
+}
+
 //here jsondecode to decode the secret credentials from vault server
 //resource "null_resource" "provisioner" {
 //  provisioner "remote-exec" {
