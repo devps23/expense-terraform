@@ -19,7 +19,7 @@ resource "aws_security_group" "security" {
   }
 }
 
-resource "aws_instance" "instance" {
+resource "aws_instance" "component" {
   ami = var.ami
   instance_type = var.instance_type
   vpc_security_group_ids = [aws_security_group.security.id]
@@ -28,13 +28,17 @@ resource "aws_instance" "instance" {
     Name = var.component
     monitor= "yes"
   }
-//  instance_market_options {
-//    market_type = "spot"
-//    spot_options {
-//      instance_interruption_behavior = "stop"
-//      spot_instance_type             = "persistent"
-//    }
-//  }
+  instance_market_options {
+    market_type = "spot"
+    spot_options {
+      instance_interruption_behavior = "stop"
+      spot_instance_type             = "persistent"
+    }
+  }
+}
+resource "aws_instance" "instance"{
+  ami = var.ami
+  instance_type = var.instance_type
 }
 
 //here jsondecode to decode the secret credentials from vault server
@@ -57,14 +61,14 @@ resource "aws_route53_record" "route_internal" {
   name = "${var.component}-internal.pdevops72.online"
   type = "A"
   zone_id = "Z09583601MY3QCL7AJKBT"
-  records = [aws_instance.instance.public_ip]
+  records = [aws_instance.component.public_ip]
   ttl = 30
 }
 resource "aws_route53_record" "route" {
   name = "${var.component}-${var.env}.pdevops72.online"
   type = "A"
   zone_id = "Z09583601MY3QCL7AJKBT"
-  records = [aws_instance.instance.private_ip]
+  records = [aws_instance.component.private_ip]
   ttl = 30
 }
 
