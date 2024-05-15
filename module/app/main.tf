@@ -31,7 +31,7 @@ resource "aws_instance" "component" {
       spot_instance_type             = "persistent"
     }
   }
-  subnet_id = var.subnets[0]
+//  subnet_id = var.subnets[0]
   tags = {
     Name = var.component
     monitor= "yes"
