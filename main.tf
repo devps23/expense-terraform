@@ -13,12 +13,10 @@
 //  env = var.env
 //}
 module "mysql" {
-  ami = "ami-090252cbe067a9e58"
   source = "./module/app"
   instance_type = var.instance_type
   component = "mysql"
   env = var.env
-
   vpc_i = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
 }
@@ -33,5 +31,5 @@ module "vpc" {
   default_vpc_id = var.default_vpc_id
   default_vpc_cidr = var.default_vpc_cidr
   default_route-table_id = var.default_route-table_id
-
+  public-subnets = var.public-subnets
 }
