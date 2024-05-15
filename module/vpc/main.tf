@@ -90,10 +90,20 @@ resource "aws_route_table" "db_route" {
     Name = "db-rt-${count.index}"
   }
 }
-resource "aws_route_table_association" "association" {
+resource "aws_route_table_association" "frontend_ass" {
   count = length(var.frontend-subnets)
   subnet_id      = aws_subnet.frontend_subnets[count.index].id
   route_table_id = aws_route_table.frontend_route[count.index].id
+}
+resource "aws_route_table_association" "backend_ass" {
+  count = length(var.backend-subnets)
+  subnet_id      = aws_subnet.backend_subnets[count.index].id
+  route_table_id = aws_route_table.backend_route[count.index].id
+}
+resource "aws_route_table_association" "db_ass" {
+  count = length(var.db-subnets)
+  subnet_id      = aws_subnet.db_subnets[count.index].id
+  route_table_id = aws_route_table.db_route[count.index].id
 }
 resource "aws_vpc_peering_connection" "peer" {
   peer_vpc_id = var.default_vpc_id
