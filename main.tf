@@ -18,7 +18,8 @@ module "mysql" {
   instance_type = var.instance_type
   component = "mysql"
   env = var.env
-  vpc = module.vpc.vpc_id
+
+  vpc_i = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
 }
 module "vpc" {

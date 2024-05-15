@@ -1,6 +1,6 @@
 variable "instance_type" {}
 variable "component" {}
 variable "env" {}
-variable "vpc" {}
+variable "vpc_i" {}
 variable "subnets" {}
 variable "ami" {}
