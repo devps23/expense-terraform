@@ -140,11 +140,7 @@ resource "aws_route_table_association" "public_ass" {
   subnet_id      = aws_subnet.public_subnets[count.index].id
   route_table_id = aws_route_table.public_route[count.index].id
 }
-resource "aws_route_table_association" "public_ass" {
-  count = length(var.public-subnets)
-  subnet_id      = aws_subnet.public_subnets[count.index].id
-  route_table_id = aws_route_table.public_route[count.index].id
-}
+
 resource "aws_vpc_peering_connection" "peer" {
   peer_vpc_id = var.default_vpc_id
   vpc_id = aws_vpc.vpc.id
