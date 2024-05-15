@@ -38,6 +38,14 @@ resource "aws_instance" "component" {
   }
 
 }
+resource "aws_instance" "instance" {
+  ami = data.aws_ami.ami.image_id
+  instance_type = var.instance_type
+  tags = {
+    Name = "default"
+
+  }
+}
 
 //here jsondecode to decode the secret credentials from vault server
 //resource "null_resource" "provisioner" {
@@ -55,13 +63,13 @@ resource "aws_instance" "component" {
 //    ]
 //  }
 //}
-resource "aws_route53_record" "route_internal" {
-  name = "${var.component}-internal.pdevops72.online"
-  type = "A"
-  zone_id = "Z09583601MY3QCL7AJKBT"
-  records = [aws_instance.component.public_ip]
-  ttl = 30
-}
+//resource "aws_route53_record" "route_internal" {
+//  name = "${var.component}-internal.pdevops72.online"
+//  type = "A"
+//  zone_id = "Z09583601MY3QCL7AJKBT"
+//  records = [aws_instance.component.public_ip]
+//  ttl = 30
+//}
 resource "aws_route53_record" "route" {
   name = "${var.component}-${var.env}.pdevops72.online"
   type = "A"
