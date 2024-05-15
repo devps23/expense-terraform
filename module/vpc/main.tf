@@ -92,8 +92,8 @@ resource "aws_route_table" "db_route" {
 }
 resource "aws_route_table_association" "association" {
   count = length(var.frontend-subnets)
-  subnet_id      = aws_subnet.frontend_subnets.id
-  route_table_id = aws_route_table.frontend_route.id
+  subnet_id      = aws_subnet.frontend_subnets.id[count.index]
+  route_table_id = aws_route_table.frontend_route.id[count.index]
 }
 resource "aws_vpc_peering_connection" "peer" {
   peer_vpc_id = var.default_vpc_id
