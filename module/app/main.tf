@@ -6,13 +6,13 @@ resource "aws_security_group" "security" {
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+
     }
   ingress {
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+
      }
   tags = {
     Name = "sg-${var.component}"
@@ -22,7 +22,7 @@ resource "aws_security_group" "security" {
 resource "aws_instance" "component" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.instance_type
-//  vpc_security_group_ids = [aws_security_group.security.id]
+  vpc_security_group_ids = [aws_security_group.security.id]
   subnet_id = var.subnets[0]
   tags = {
     Name = var.component
