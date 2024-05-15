@@ -41,6 +41,14 @@ resource "aws_instance" "component" {
 resource "aws_instance" "instance" {
   ami = data.aws_ami.ami.image_id
   instance_type = var.instance_type
+  vpc_security_group_ids = [aws_security_group.security.id]
+    instance_market_options {
+      market_type = "spot"
+      spot_options {
+        instance_interruption_behavior = "stop"
+        spot_instance_type             = "persistent"
+      }
+    }
   tags = {
     Name = "default"
 
