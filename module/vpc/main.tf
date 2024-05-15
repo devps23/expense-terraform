@@ -4,7 +4,7 @@ resource "aws_vpc" "vpc" {
     Name = "vpc-${var.env}-new"
   }
 }
-resource "aws_subnet" "frontend" {
+resource "aws_subnet" "frontend_subnets" {
   count                = length(var.frontend-subnets)
   vpc_id               = aws_vpc.vpc.id
   cidr_block           = var.frontend-subnets[count.index]
@@ -14,7 +14,7 @@ resource "aws_subnet" "frontend" {
     Name = "${var.env}-frontend-subnets-${count.index}"
   }
 }
-resource "aws_subnet" "backend" {
+resource "aws_subnet" "backend_subnets" {
   count                = length(var.backend-subnets)
   vpc_id               = aws_vpc.vpc.id
   cidr_block           = var.backend-subnets[count.index]
@@ -61,7 +61,7 @@ resource "aws_route_table" "frontend_route" {
 
   }
   tags = {
-    Name = "${var.component}-rt-${count.index}"
+    Name = "frontend-rt-${count.index}"
   }
 }
 resource "aws_route_table" "backend_route" {
@@ -74,7 +74,7 @@ resource "aws_route_table" "backend_route" {
 
   }
   tags = {
-    Name = "${var.component}-rt-${count.index}"
+    Name = "backend-rt-${count.index}"
   }
 }
 resource "aws_route_table" "db_route" {
@@ -87,7 +87,7 @@ resource "aws_route_table" "db_route" {
 
   }
   tags = {
-    Name = "${var.component}-rt-${count.index}"
+    Name = "db-rt-${count.index}"
   }
 }
 resource "aws_vpc_peering_connection" "peer" {
