@@ -79,7 +79,7 @@ resource "aws_route_table" "backend_route" {
 
   }
   route {
-    cidr_block = 0.0.0.0/0
+    cidr_block = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat.id
 
   }
@@ -97,7 +97,7 @@ resource "aws_route_table" "db_route" {
 
   }
   route {
-    cidr_block = 0.0.0.0/0
+    cidr_block = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat.id
 
   }
@@ -115,7 +115,7 @@ resource "aws_route_table" "public_route" {
 
   }
   route {
-    cidr_block = 0.0.0.0/0
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
   tags = {
