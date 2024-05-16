@@ -39,28 +39,28 @@ resource "aws_instance" "component" {
 }
 
 //here jsondecode to decode the secret credentials from vault server
-//resource "null_resource" "provisioner" {
-//  provisioner "remote-exec" {
-//    connection {
-//      type     = "ssh"
-//      user     =  jsondecode(data.vault_generic_secret.rundeck_auth.data_json).user
-//      password =  jsondecode(data.vault_generic_secret.rundeck_auth.data_json).pass
-//      host     = aws_instance.instance.public_ip
-//    }
-//    inline = [
-//      "sudo pip3.11 install ansible",
-//      "ansible-pull -i localhost, -U https://github.com/devps23/expense-ansible expense.yml -e env=${var.env} -e component_name=${var.component}"
-//
-//    ]
-//  }
-//}
-//resource "aws_route53_record" "route_internal" {
-//  name = "${var.component}-internal.pdevops72.online"
-//  type = "A"
-//  zone_id = "Z09583601MY3QCL7AJKBT"
-//  records = [aws_instance.component.public_ip]
-//  ttl = 30
-//}
+resource "null_resource" "provisioner" {
+  provisioner "remote-exec" {
+    connection {
+      type     = "ssh"
+      user     =  jsondecode(data.vault_generic_secret.rundeck_auth.data_json).user
+      password =  jsondecode(data.vault_generic_secret.rundeck_auth.data_json).pass
+      host     = aws_instance.component.public_ip
+    }
+    inline = [
+      "sudo pip3.11 install ansible",
+      "ansible-pull -i localhost, -U https://github.com/devps23/expense-ansible expense.yml -e env=${var.env} -e component_name=${var.component}"
+
+    ]
+  }
+}
+resource "aws_route53_record" "route_internal" {
+  name = "${var.component}-internal.pdevops72.online"
+  type = "A"
+  zone_id = "Z09583601MY3QCL7AJKBT"
+  records = [aws_instance.component.public_ip]
+  ttl = 30
+}
 resource "aws_route53_record" "route" {
   name = "${var.component}-${var.env}.pdevops72.online"
   type = "A"
