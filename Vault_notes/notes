@@ -236,7 +236,7 @@ secret data : test(user) , test123(password)
       same steps follow for automation
 
 
-curl 'http://34.228.142.178:8153/go/api/admin/encrypt' \
+curl 'http://54.221.1.189:8153/go/api/admin/encrypt' \
 -H 'Accept: application/vnd.go.cd.v1+json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{
