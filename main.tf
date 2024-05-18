@@ -1,17 +1,21 @@
-//module "frontend" {
-//  depends_on = [module.backend]
-//  source = "./module/app"
-//  instance_type = var.instance_type
-//  component = "frontend"
-//  env = var.env
-//}
-//module "backend" {
-//  depends_on = [module.mysql]
-//  source = "./module/app"
-//  instance_type = var.instance_type
-//  component = "backend"
-//  env = var.env
-//}
+module "frontend" {
+  depends_on = [module.backend]
+  source = "./module/app"
+  instance_type = var.instance_type
+  component = "frontend"
+  env = var.env
+  vpc_i = module.vpc.vpc_id
+  subnets = module.vpc.db_subnets
+}
+module "backend" {
+  depends_on = [module.mysql]
+  source = "./module/app"
+  instance_type = var.instance_type
+  component = "backend"
+  env = var.env
+  vpc_i = module.vpc.vpc_id
+  subnets = module.vpc.db_subnets
+}
 module "mysql" {
   source = "./module/app"
   instance_type = var.instance_type

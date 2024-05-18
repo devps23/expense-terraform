@@ -46,6 +46,7 @@ resource "null_resource" "provisioner" {
       user     =  jsondecode(data.vault_generic_secret.rundeck_auth.data_json).user
       password =  jsondecode(data.vault_generic_secret.rundeck_auth.data_json).pass
       host     = aws_instance.component.public_ip
+
     }
     inline = [
       "sudo pip3.11 install ansible",
