@@ -10,7 +10,7 @@ variable "default_vpc_id" {}
 variable "default_vpc_cidr"{}
 variable "default_route-table_id"{}
 variable "token"{}
-variable "app_port"{}
+
 
 
 

@@ -12,4 +12,6 @@ variable "psubnets" {
 variable "lb_need"{
   default = false
 }
-variable "app_port"{}
+variable "app_port"{
+  default = null
+}
