@@ -15,7 +15,7 @@ variable "app_port"{
 variable "lb_required" {
   default = false
 }
-variable "lb_internet_facing"{
+variable "lb_internet_type"{
   default = null
 }
 variable "target_group"{
