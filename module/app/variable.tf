@@ -9,9 +9,9 @@ variable "lb_type" {
 variable "psubnets" {
   default = null
 }
-variable "lb_need"{
-  default = false
-}
 variable "app_port"{
   default = null
+}
+variable "lb_required" {
+  default = false
 }

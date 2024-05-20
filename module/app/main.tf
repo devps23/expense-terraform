@@ -70,8 +70,9 @@ resource "aws_route53_record" "route" {
   ttl = 30
 }
 resource "aws_lb_target_group" "target" {
+  count    = var.lb_required ? 1 : 0
   name     = "${var.env}-${var.component}-tg"
-  port     = 80
+  port     = var.app_port
   protocol = "HTTP"
   vpc_id   = var.vpc_id
   tags = {
