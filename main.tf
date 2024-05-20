@@ -26,6 +26,7 @@ module "backend" {
   app_port = 8080
   target_group = true
   lb_subnets = module.vpc.backend_subnets
+  certificate_arn = var.certificate_arn
   }
 module "mysql" {
   source = "./module/app"
