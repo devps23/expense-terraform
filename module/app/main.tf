@@ -100,7 +100,7 @@ resource "aws_lb_target_group" "target" {
 resource "aws_lb_listener" "listener" {
   count = var.lb_required  && var.lb_type== "public" ? 1 : 0
   load_balancer_arn = aws_lb.lb[0].arn
-  port              = var.app_port
+  port              = "443"
   protocol          = "HTTPS"
   default_action {
     type             = "forward"
