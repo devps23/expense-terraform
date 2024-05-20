@@ -7,7 +7,7 @@ module "frontend" {
   vpc_id = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
   lb_type = "public"
-  psubnets = module.vpc.public_subnets
+
 
 }
 module "backend" {
