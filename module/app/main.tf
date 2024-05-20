@@ -70,7 +70,7 @@ resource "aws_route53_record" "route" {
   ttl = 30
 }
 resource "aws_lb_target_group" "target" {
-  count    = var.lb_required ? 1 : 0
+  count    = var.target_group ? 1 : 0
   name     = "${var.env}-${var.component}-tg"
   port     = var.app_port
   protocol = "HTTP"
@@ -79,17 +79,18 @@ resource "aws_lb_target_group" "target" {
     Name = "${var.env}-${var.component}-tg"
   }
 }
-resource "aws_lb" "lb" {
-  name               = "${var.env}-${var.component}-lb"
-  internal           =  var.lb_internet_facing ? 1 : 0
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.security.id]
-  subnets            = var.lb_subnets
-
-  tags               = {
-    Name = "${var.env}-${var.component}-lb"
-  }
-}
+//resource "aws_lb" "lb" {
+//  count              = var.lb_required ? 1 : 0
+//  name               = "${var.env}-${var.component}-lb"
+//  internal           =  var.lb_internet_facing ? 1 : 0
+//  load_balancer_type = "application"
+//  security_groups    = [aws_security_group.security.id]
+//  subnets            = var.lb_subnets
+//
+//  tags               = {
+//    Name = "${var.env}-${var.component}-lb"
+//  }
+//}
 
 
 

@@ -18,3 +18,6 @@ variable "lb_required" {
 variable "lb_internet_facing"{
   default = null
 }
+variable "target_group"{
+  default = null
+}

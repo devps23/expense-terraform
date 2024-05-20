@@ -9,6 +9,7 @@ module "frontend" {
   lb_internet_type = "public"
   lb_required = true
   app_port = 80
+  target_group = true
 }
 module "backend" {
   depends_on = [module.mysql]
@@ -21,6 +22,7 @@ module "backend" {
   lb_internet_type = "private"
   lb_required = true
   app_port = 8080
+  target_group = true
   }
 module "mysql" {
   source = "./module/app"
