@@ -10,6 +10,7 @@ availability_zone = ["us-east-1a","us-east-1b"]
 default_vpc_id = "vpc-02a94ee8944923438"
 default_vpc_cidr = "172.31.0.0/16"
 default_route-table_id = "rtb-0a2e9ff93585c96fd"
+certificate_arn = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
 //token = "hvs.jUJeWSfOihA8RVtnhx9FbHLi"
 
 //frontend-subnets  = ["10.10.0.0/20","10.10.16.0/20"]
