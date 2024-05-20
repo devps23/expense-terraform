@@ -1,7 +1,7 @@
 resource "aws_security_group" "security" {
   name        = "security-${var.component}-${var.env}"
   description = "security-${var.component}-${var.env}"
-  vpc_id      = var.vpc_i
+  vpc_id      = var.vpc_id
   egress {
     from_port        = 0
     to_port          = 0
@@ -68,6 +68,15 @@ resource "aws_route53_record" "route" {
   zone_id = "Z09583601MY3QCL7AJKBT"
   records = [aws_instance.component.private_ip]
   ttl = 30
+}
+resource "aws_lb_target_group" "target" {
+  name     = "${var.env}-${var.component}-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = var.vpc_id
+  tags = {
+    Name = "${var.env}-${var.component}-tg"
+  }
 }
 
 

@@ -4,7 +4,7 @@ module "frontend" {
   instance_type = var.instance_type
   component = "frontend"
   env = var.env
-  vpc_i = module.vpc.vpc_id
+  vpc_id = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
   lb_type = "public"
   psubnets = module.vpc.public_subnets
