@@ -10,6 +10,7 @@ module "frontend" {
   lb_required = true
   app_port = 80
   target_group = true
+  lb_subnets = module.vpc.public_subnets
 }
 module "backend" {
   depends_on = [module.mysql]
@@ -23,6 +24,7 @@ module "backend" {
   lb_required = true
   app_port = 8080
   target_group = true
+  lb_subnets = module.vpc.backend_subnets
   }
 module "mysql" {
   source = "./module/app"
