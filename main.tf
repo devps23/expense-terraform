@@ -7,8 +7,6 @@ module "frontend" {
   vpc_id = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
   lb_type = "public"
-
-
 }
 module "backend" {
   depends_on = [module.mysql]
@@ -19,9 +17,7 @@ module "backend" {
   vpc_id = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
   lb_type = "private"
-  psubnet = module.vpc.backend_subnets
-
-}
+  }
 module "mysql" {
   source = "./module/app"
   instance_type = var.instance_type
