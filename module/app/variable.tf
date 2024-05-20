@@ -16,7 +16,7 @@ variable "lb_required" {
   default = false
 }
 variable "lb_internet_type"{
-  default = null
+  default = false
 }
 variable "target_group"{
   default = false
