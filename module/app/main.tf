@@ -98,17 +98,33 @@ resource "aws_lb_target_group" "target" {
   }
 }
 resource "aws_lb_listener" "listener" {
-  count = var.lb_required  && var.lb_type== "public" ? 1 : 0
+  count = var.lb_required  && var.lb_type == "public" ? 1 : 0
   load_balancer_arn = aws_lb.lb[0].arn
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = var.certificate_arn
+  port              = "80"
+  protocol          = "HTTP"
+//  ssl_policy        = "ELBSecurityPolicy-2016-08"
+//  certificate_arn   = var.certificate_arn
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.target[0].arn
   }
 }
+resource "aws_lb_listener_rule" "host_based_weighted_routing" {
+  listener_arn = aws_lb_listener.listener[0].arn
+  priority     = 99
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.target[0].arn
+  }
+
+  condition {
+    host_header {
+      values = ["my-service.*.terraform.io"]
+    }
+  }
+}
+
 
 
 
