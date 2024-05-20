@@ -98,12 +98,12 @@ resource "aws_lb_target_group" "target" {
   }
 }
 resource "aws_lb_listener" "listener" {
-  load_balancer_arn = aws_lb.lb.arn
+  load_balancer_arn = aws_lb.lb[0].arn
   port              = var.app_port
   protocol          = "HTTPS"
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.target.arn
+    target_group_arn = aws_lb_target_group.target[0].arn
   }
 }
 
