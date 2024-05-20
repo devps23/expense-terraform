@@ -8,6 +8,7 @@ module "frontend" {
   subnets = module.vpc.db_subnets
   lb_type = "public"
   lb_required = true
+  app_port = 80
 }
 module "backend" {
   depends_on = [module.mysql]
@@ -19,6 +20,7 @@ module "backend" {
   subnets = module.vpc.db_subnets
   lb_type = "private"
   lb_required = true
+  app_port = 8080
   }
 module "mysql" {
   source = "./module/app"
