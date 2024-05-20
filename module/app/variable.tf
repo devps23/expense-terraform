@@ -19,5 +19,5 @@ variable "lb_internet_type"{
   default = null
 }
 variable "target_group"{
-  default = null
+  default = false
 }
