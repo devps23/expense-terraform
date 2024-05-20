@@ -6,7 +6,7 @@ variable "subnets" {}
 variable "lb_type" {
   default = null
 }
-variable "psubnets" {
+variable "lb_subnets" {
   default = null
 }
 variable "app_port"{
@@ -14,4 +14,7 @@ variable "app_port"{
 }
 variable "lb_required" {
   default = false
+}
+variable "lb_internet_facing"{
+  default = null
 }

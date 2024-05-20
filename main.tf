@@ -6,7 +6,7 @@ module "frontend" {
   env = var.env
   vpc_id = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
-  lb_type = "public"
+  lb_internet_type = "public"
   lb_required = true
   app_port = 80
 }
@@ -18,7 +18,7 @@ module "backend" {
   env = var.env
   vpc_id = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
-  lb_type = "private"
+  lb_internet_type = "private"
   lb_required = true
   app_port = 8080
   }
