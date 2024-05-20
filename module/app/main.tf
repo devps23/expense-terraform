@@ -92,8 +92,7 @@ resource "aws_lb" "lb" {
   }
 }
 resource "aws_lb_target_group_attachment" "test" {
-  count            = length(aws_lb_target_group.target.id)
-  target_group_arn = aws_lb_target_group[count.index].target.arn
+  target_group_arn = aws_lb_target_group.target[0].arn
   target_id        = aws_instance.component.id
   port             = var.app_port
 }
