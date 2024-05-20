@@ -11,6 +11,7 @@ module "frontend" {
   app_port = 80
   target_group = true
   lb_subnets = module.vpc.public_subnets
+  certificate_arn = var.certificate_arn
 }
 module "backend" {
   depends_on = [module.mysql]

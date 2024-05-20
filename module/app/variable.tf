@@ -21,3 +21,6 @@ variable "lb_internet_type"{
 variable "target_group"{
   default = false
 }
+variable "certificate_arn" {
+  default = null
+}
