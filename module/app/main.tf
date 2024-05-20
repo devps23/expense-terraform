@@ -110,6 +110,7 @@ resource "aws_lb_listener" "listener" {
   }
 }
 resource "aws_lb_listener_rule" "host_based_weighted_routing" {
+  count = var.lb_required  && var.lb_type == "public" ? 1 : 0
   listener_arn = aws_lb_listener.listener[0].arn
   priority     = 99
 
