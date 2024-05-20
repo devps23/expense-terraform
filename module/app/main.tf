@@ -82,7 +82,7 @@ resource "aws_lb_target_group" "target" {
 resource "aws_lb" "lb" {
   count              = var.lb_required ? 1 : 0
   name               = "${var.env}-${var.component}-lb"
-  internal           =  var.lb_internet_type ? true : false
+  internal           =  var.lb_internet_type
   load_balancer_type = "application"
   security_groups    = [aws_security_group.security.id]
   subnets            = var.lb_subnets
