@@ -3,6 +3,8 @@ variable "component" {}
 variable "env" {}
 variable "vpc_id" {}
 variable "subnets" {}
+variable "ssh_user"{}
+variable "ssh_pass"{}
 variable "lb_tg_group" {
   default = false
 }

@@ -42,8 +42,8 @@ resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
-      user     =  ssh_user
-      password =  ssh_pass
+      user     =  var.ssh_user
+      password =  var.ssh_pass
       host     = aws_instance.component.public_ip
 
     }
