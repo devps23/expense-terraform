@@ -74,7 +74,7 @@ resource "aws_route53_record" "route-lb-dns" {
   name = "lb-${var.component}-${var.env}.pdevops72.online"
   type = "CNAME"
   zone_id = "Z09583601MY3QCL7AJKBT"
-  records = [aws_lb.lb[0].id]
+  records = [aws_lb.lb[0].dns_name]
   ttl = 30
 }
 resource "aws_lb_target_group" "target" {
