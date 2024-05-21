@@ -105,7 +105,7 @@ resource "aws_lb" "lb" {
 }
 resource "aws_lb_listener" "lb-listener" {
   count              = var.lb_req ? 1 : 0
-  load_balancer_arn = aws_lb.lb[0].arn
+  load_balancer_arn = aws_lb.lb.arn
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
