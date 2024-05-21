@@ -18,7 +18,9 @@ variable "lb_subnets" {
 variable "certificate_arn"{
   default = null
 }
-variable "app_port" {}
+variable "app_port" {
+  default = null
+}
 
 
 
