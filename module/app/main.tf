@@ -70,7 +70,7 @@ resource "aws_route53_record" "route" {
   ttl = 30
 }
 resource "aws_route53_record" "route-lb-dns" {
-  count              = var.lb_req ? true : false
+  count              = var.lb_req ? 1 : 0
   name = "lb-${var.component}-${var.env}.pdevops72.online"
   type = "CNAME"
   zone_id = "Z09583601MY3QCL7AJKBT"
@@ -78,7 +78,7 @@ resource "aws_route53_record" "route-lb-dns" {
   ttl = 30
 }
 resource "aws_lb_target_group" "target" {
-  count = var.lb_tg_group ? true : false
+  count = var.lb_tg_group ? 1 : 0
   name     = "${var.env}-${var.component}-tg"
   port     = 80
   protocol = "HTTP"
@@ -88,13 +88,13 @@ resource "aws_lb_target_group" "target" {
   }
 }
 resource "aws_lb_target_group_attachment" "tg-attachment" {
-  count            = var.lb_tg_group ? true : false
+  count            = var.lb_tg_group ? 1 : 0
   target_group_arn = aws_lb_target_group.target[0].arn
   target_id        = aws_instance.component.id
   port             = 80
 }
 resource "aws_lb" "lb" {
-  count              = var.lb_req ? true : false
+  count              = var.lb_req ? 1 : 0
   name               = "${var.env}-${var.component}-lb"
   internal           = var.lb_internet_type == "public" ? false : true
   load_balancer_type = "application"
@@ -104,7 +104,7 @@ resource "aws_lb" "lb" {
   }
 }
 resource "aws_lb_listener" "lb-listener" {
-  count              = var.lb_req ? true : false
+  count              = var.lb_req ? 1 : 0
   load_balancer_arn = aws_lb.lb.arn
   port              = "443"
   protocol          = "HTTPS"
