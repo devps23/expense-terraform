@@ -69,62 +69,8 @@ resource "aws_route53_record" "route" {
   records = [aws_instance.component.private_ip]
   ttl = 30
 }
-resource "aws_lb" "lb" {
-  count              = var.lb_required ? 1 : 0
-  name               = "${var.env}-${var.component}-lb"
-  internal           =  var.lb_internet_type == "public" ? true : false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.security.id]
-  subnets            = var.lb_subnets
 
-  tags               = {
-    Name = "${var.env}-${var.component}-lb"
-  }
-}
-resource "aws_lb_target_group_attachment" "tg_attach" {
-  count            = var.target_group ? 1 : 0
-  target_group_arn = aws_lb_target_group.target[0].arn
-  target_id        = aws_instance.component.id
-  port             = var.app_port
-}
-resource "aws_lb_target_group" "target" {
-  count    = var.target_group ? 1 : 0
-  name     = "${var.env}-${var.component}-tg"
-  port     = var.app_port
-  protocol = "HTTP"
-  vpc_id   = var.vpc_id
-  tags = {
-    Name = "${var.env}-${var.component}-tg"
-  }
-}
-resource "aws_lb_listener" "listener" {
-  count = var.lb_required  && var.lb_type == "public" ? 1 : 0
-  load_balancer_arn = aws_lb.lb[0].arn
-  port              = "80"
-  protocol          = "HTTP"
-//  ssl_policy        = "ELBSecurityPolicy-2016-08"
-//  certificate_arn   = var.certificate_arn
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.target[0].arn
-  }
-}
-resource "aws_lb_listener_rule" "host_based_weighted_routing" {
-  count = var.lb_required  && var.lb_type == "public" ? 1 : 0
-  listener_arn = aws_lb_listener.listener[0].arn
-  priority     = 99
 
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.target[0].arn
-  }
-
-  condition {
-    host_header {
-      values = [0]
-    }
-  }
-}
 
 
 
