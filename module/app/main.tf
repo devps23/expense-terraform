@@ -44,7 +44,7 @@ resource "null_resource" "provisioner" {
       type     = "ssh"
       user     =  var.ssh_user
       password =  var.ssh_pass
-      host     = aws_instance.component.public_ip
+      host     = aws_instance.component.private_ip
 
     }
     inline = [
