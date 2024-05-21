@@ -11,6 +11,7 @@ module "frontend" {
   lb_req = true
   lb_subnets = module.vpc.public_subnets
   certificate_arn = var.certificate_arn
+  app_port = 80
 }
 module "backend" {
   depends_on = [module.mysql]
@@ -25,6 +26,7 @@ module "backend" {
   lb_req = true
   lb_subnets = module.vpc.backend_subnets
   certificate_arn = var.certificate_arn
+  app_port = 8080
   }
 module "mysql" {
   source = "./module/app"

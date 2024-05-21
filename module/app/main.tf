@@ -103,7 +103,7 @@ resource "aws_lb" "lb" {
     Environment = "${var.env}-${var.component}-lb"
   }
 }
-resource "aws_lb_listener" "lb-listener" {
+resource "aws_lb_listener" "frontend-listener" {
   count              = var.lb_req && var.lb_internet_type == "public" ? 1 : 0
   load_balancer_arn = aws_lb.lb[0].arn
   port              = "443"
@@ -115,6 +115,18 @@ resource "aws_lb_listener" "lb-listener" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.target[0].arn
   }
+}
+resource "aws_lb_listener" "backend" {
+  count             = var.lb_req && var.lb_internet_type != "public" ? 1 : 0
+  load_balancer_arn = aws_lb.lb[0].arn
+  port              = var.app_port
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.target[0].arn
+  }
+
 }
 
 
