@@ -117,7 +117,7 @@ resource "aws_lb_listener" "lb-listener" {
   }
 }
 resource "aws_lb_listener_certificate" "cert" {
-  listener_arn    = aws_lb_listener.lb-listener.arn
+  listener_arn    = aws_lb_listener.lb-listener[0].arn
   certificate_arn = var.certificate_arn
 }
 
