@@ -116,10 +116,7 @@ resource "aws_lb_listener" "lb-listener" {
     target_group_arn = aws_lb_target_group.target[0].arn
   }
 }
-resource "aws_lb_listener_certificate" "cert" {
-  listener_arn    = aws_lb_listener.lb-listener[0].arn
-  certificate_arn = var.certificate_arn
-}
+
 
 
 
