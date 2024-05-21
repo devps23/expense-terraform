@@ -6,7 +6,11 @@ module "frontend" {
   env = var.env
   vpc_id = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
-
+  lb_tg_group  = true
+  lb_internet_type = "public"
+  lb_req = true
+  lb_subnets = module.vpc.public_subnets
+  certificate_arn = var.certificate_arn
 }
 module "backend" {
   depends_on = [module.mysql]
@@ -16,7 +20,11 @@ module "backend" {
   env = var.env
   vpc_id = module.vpc.vpc_id
   subnets = module.vpc.db_subnets
-
+  lb_tg_group = true
+  lb_internet_type = "private"
+  lb_req = true
+  lb_subnets = module.vpc.backend_subnets
+  certificate_arn = var.certificate_arn
   }
 module "mysql" {
   source = "./module/app"
