@@ -11,12 +11,5 @@ default_vpc_id = "vpc-02a94ee8944923438"
 default_vpc_cidr = "172.31.0.0/16"
 default_route-table_id= "rtb-0a2e9ff93585c96fd"
 token = "hvs.jUJeWSfOihA8RVtnhx9FbHLi"
-certificate_arn =  "arn:aws:acm:us-east-1:633788536644:certificate/274d4c80-dc76-4296-b3ed-d959cbe837ba"
-arn:aws:acm-pca:us-east-1:account:certificate-authority/12345678-1234-1234-1234-123456789012.
-//arn:aws:elasticloadbalancing:us-east-1:041445559784:loadbalancer/app/dev-frontend-lb/9edf66f6a4f32e20
-"arn:aws:acm:us-east-1:633788536644:certificate/274d4c80-dc76-4296-b3ed-d959cbe837ba"
-
-//frontend-subnets  = ["10.10.0.0/20","10.10.16.0/20"]
-//backend-subnets   = ["10.10.32.0/20","10.10.48.0/20"]
-//db-subnets        = ["10.10.64.0/20","10.10.80.0/20"]
-
+ssh_user = "ec2-user"
+ssh_pass = "DevOps321"
