@@ -74,7 +74,7 @@ resource "aws_route53_record" "route-lb-dns" {
   name = "lb-${var.component}-${var.env}.pdevops72.online"
   type = "CNAME"
   zone_id = "Z09583601MY3QCL7AJKBT"
-  records = [aws_lb.lb.id]
+  records = [aws_lb.lb[0].id]
   ttl = 30
 }
 resource "aws_lb_target_group" "target" {
@@ -105,7 +105,7 @@ resource "aws_lb" "lb" {
 }
 resource "aws_lb_listener" "lb-listener" {
   count              = var.lb_req ? 1 : 0
-  load_balancer_arn = aws_lb.lb.arn
+  load_balancer_arn = aws_lb.lb[0].arn
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
