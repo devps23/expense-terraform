@@ -98,7 +98,7 @@ resource "aws_lb" "lb" {
   name               = "${var.env}-${var.component}-lb"
   internal           = var.lb_internet_type == "public" ? false : true
   load_balancer_type = "application"
-  subnets            = var.lb_subnets
+  subnets            = var.lb_subnets[0]
   tags = {
     Environment = "${var.env}-${var.component}-lb"
   }
