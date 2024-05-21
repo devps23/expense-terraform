@@ -15,8 +15,5 @@ variable "lb_req"{
 variable "lb_subnets" {
   default = null
 }
-variable "certificate_arn"{
-  default = null
-}
-
+variable "certificate_arn"{}
 
