@@ -10,7 +10,6 @@ module "frontend" {
   lb_internet_type = "public"
   lb_req = true
   lb_subnets = module.vpc.public_subnets
-  certificate_arn = var.certificate_arn
   app_port = 80
   ssh_user = var.ssh_user
   ssh_pass = var.ssh_pass
@@ -27,7 +26,6 @@ module "backend" {
   lb_internet_type = "private"
   lb_req = true
   lb_subnets = module.vpc.backend_subnets
-  certificate_arn = var.certificate_arn
   app_port = 8080
   ssh_user = var.ssh_user
   ssh_pass = var.ssh_pass
