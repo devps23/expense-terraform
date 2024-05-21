@@ -13,6 +13,8 @@ default_route-table_id= "rtb-0a2e9ff93585c96fd"
 token = "hvs.jUJeWSfOihA8RVtnhx9FbHLi"
 certificate_arn =  "arn:aws:acm:us-east-1:633788536644:certificate/274d4c80-dc76-4296-b3ed-d959cbe837ba"
 
+//arn:aws:elasticloadbalancing:us-east-1:041445559784:loadbalancer/app/dev-frontend-lb/9edf66f6a4f32e20
+"arn:aws:acm:us-east-1:633788536644:certificate/274d4c80-dc76-4296-b3ed-d959cbe837ba"
 
 //frontend-subnets  = ["10.10.0.0/20","10.10.16.0/20"]
 //backend-subnets   = ["10.10.32.0/20","10.10.48.0/20"]
