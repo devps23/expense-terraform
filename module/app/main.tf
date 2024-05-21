@@ -109,17 +109,12 @@ resource "aws_lb_listener" "lb-listener" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
-
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.target[0].arn
   }
 }
-resource "aws_lb_listener_certificate" "cert" {
-  listener_arn    = aws_lb_listener.lb-listener[0].arn
-  certificate_arn = var.certificate_arn
-}
+
 
 
 
