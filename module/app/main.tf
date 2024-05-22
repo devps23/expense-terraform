@@ -11,13 +11,13 @@ resource "aws_security_group" "security" {
    ingress {
     from_port        = var.app_port
     to_port          = var.app_port
-    protocol         = "-1"
+    protocol         = "TCP"
     cidr_blocks      = var.add_sg_app_port_inst
      }
   ingress {
     from_port        = 22
     to_port          = 22
-    protocol         = "-1"
+    protocol         = "TCP"
     cidr_blocks      = var.bastion_nodes
   }
   tags = {
