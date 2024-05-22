@@ -132,6 +132,7 @@ resource "aws_lb" "lb" {
   name               = "${var.env}-${var.component}-lb"
   internal           = var.lb_internet_type == "public" ? false : true
   load_balancer_type = "application"
+  security_groups    = [aws_security_group.lb_security[0].id]
   subnets            = var.lb_subnets
   tags = {
     Environment = "${var.env}-${var.component}-lb"
