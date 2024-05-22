@@ -34,6 +34,7 @@ module "backend" {
   app_port = 8080
   bastion_nodes = var.bastion_nodes
   add_sg_app_port_inst = concat(var.frontend-subnets,var.backend-subnets)
+  out_sg_app_port_inst = var.frontend-subnets
   }
 module "mysql" {
   source = "./module/app"
