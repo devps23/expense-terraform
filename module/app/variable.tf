@@ -23,6 +23,8 @@ variable "certificate_arn"{
 variable "app_port" {
   default = null
 }
-
+variable "bastion_nodes" {
+  default = []
+}
 
 

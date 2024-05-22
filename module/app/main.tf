@@ -9,11 +9,17 @@ resource "aws_security_group" "security" {
     cidr_blocks      = ["0.0.0.0/0"]
     }
   ingress {
-    from_port        = 0
-    to_port          = 0
+    from_port        = var.app_port
+    to_port          = var.app_port
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
      }
+  ingress {
+    from_port        = 22
+    to_port          = 22
+    protocol         = "-1"
+    cidr_blocks      = var.bastion_nodes
+  }
   tags = {
     Name = "sg-${var.component}"
   }

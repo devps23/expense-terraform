@@ -13,6 +13,8 @@ module "frontend" {
   app_port = 80
   ssh_user = var.ssh_user
   ssh_pass = var.ssh_pass
+  bastion_nodes = var.bastion_nodes
+  add_sg_app_port_inst = var.public-subnets
 }
 module "backend" {
   depends_on = [module.mysql]
@@ -29,7 +31,8 @@ module "backend" {
   lb_req = true
   lb_subnets = module.vpc.backend_subnets
   app_port = 8080
-
+  bastion_nodes = var.bastion_nodes
+  add_sg_app_port_inst = concat(var.frontend-subnets,var.backend-subnets)
   }
 module "mysql" {
   source = "./module/app"
@@ -40,6 +43,9 @@ module "mysql" {
   subnets = module.vpc.db_subnets
   ssh_user = var.ssh_user
   ssh_pass = var.ssh_pass
+  bastion_nodes = var.bastion_nodes
+  add_sg_app_port_inst = var.db-subnets
+
 }
 module "vpc" {
   source = "./module/vpc"
@@ -53,4 +59,5 @@ module "vpc" {
   default_vpc_cidr = var.default_vpc_cidr
   default_route-table_id = var.default_route-table_id
   public-subnets = var.public-subnets
+
 }
