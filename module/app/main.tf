@@ -12,7 +12,7 @@ resource "aws_security_group" "security" {
     from_port        = var.app_port
     to_port          = var.app_port
     protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = var.add_sg_app_port_inst
      }
   ingress {
     from_port        = 22

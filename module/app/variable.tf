@@ -5,6 +5,7 @@ variable "vpc_id" {}
 variable "subnets" {}
 variable "ssh_user"{}
 variable "ssh_pass"{}
+variable "add_sg_app_port_inst" {}
 variable "lb_tg_group" {
   default = false
 }
