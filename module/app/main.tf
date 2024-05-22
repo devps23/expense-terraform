@@ -43,7 +43,27 @@ resource "aws_instance" "component" {
   }
 
 }
+resource "aws_security_group" "lb_security" {
+  name        = "security-${var.component}-${var.env}-lb"
+  description = "security-${var.component}-${var.env}-lb"
+  vpc_id      = var.vpc_id
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port        = var.app_port
+    to_port          = var.app_port
+    protocol         = "TCP"
+    cidr_blocks      = var.out_sg_app_port_inst
+  }
 
+  tags = {
+    Name = "sg-${var.component}-lb"
+  }
+}
 resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
     connection {
