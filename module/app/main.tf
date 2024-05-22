@@ -44,6 +44,7 @@ resource "aws_instance" "component" {
 
 }
 resource "aws_security_group" "lb_security" {
+  count              = var.lb_req && var.lb_internet_type == "public" ? 1 : 0
   name        = "security-${var.component}-${var.env}-lb"
   description = "security-${var.component}-${var.env}-lb"
   vpc_id      = var.vpc_id
