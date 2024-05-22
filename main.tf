@@ -43,6 +43,7 @@ module "mysql" {
   subnets = module.vpc.db_subnets
   ssh_user = var.ssh_user
   ssh_pass = var.ssh_pass
+  app_port = 3306
   bastion_nodes = var.bastion_nodes
   add_sg_app_port_inst = var.db-subnets
 
