@@ -44,23 +44,22 @@ resource "aws_instance" "component" {
 
 }
 resource "aws_security_group" "lb_security" {
-  count              = var.lb_req && var.lb_internet_type == "public" ? 1 : 0
+  count        = var.lb_req ? 1 : 0
   name        = "security-${var.component}-${var.env}-lb"
   description = "security-${var.component}-${var.env}-lb"
   vpc_id      = var.vpc_id
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
   ingress {
     from_port        = var.app_port
     to_port          = var.app_port
     protocol         = "TCP"
     cidr_blocks      = var.out_sg_app_port_inst
   }
-
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
   tags = {
     Name = "sg-${var.component}-lb"
   }
