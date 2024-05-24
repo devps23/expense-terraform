@@ -25,8 +25,8 @@ variable "app_port" {
   default = null
 }
 variable "bastion_nodes" {}
-//variable "out_sg_app_port_inst" {
-//  default = []
-//}
+variable "access_sg_app_port" {
+  default = []
+}
 
 
