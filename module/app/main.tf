@@ -44,27 +44,27 @@ resource "aws_instance" "component" {
   }
 
 }
-//resource "aws_security_group" "lb_security" {
-//  count        = var.lb_req ? 1 : 0
-//  name        = "security-${var.component}-${var.env}-lb"
-//  description = "security-${var.component}-${var.env}-lb"
-//  vpc_id      = var.vpc_id
-//  ingress {
-//    from_port        = var.app_port
-//    to_port          = var.app_port
-//    protocol         = "TCP"
-//    cidr_blocks      = var.out_sg_app_port_inst
-//  }
-//  egress {
-//    from_port        = 0
-//    to_port          = 0
-//    protocol         = "-1"
-//    cidr_blocks      = ["0.0.0.0/0"]
-//  }
-//  tags = {
-//    Name = "sg-${var.component}-lb"
-//  }
-//}
+resource "aws_security_group" "lb_security" {
+  count        = var.lb_req ? 1 : 0
+  name        = "security-${var.component}-${var.env}-lb"
+  description = "security-${var.component}-${var.env}-lb"
+  vpc_id      = var.vpc_id
+  ingress {
+    from_port        = 22
+    to_port          = 22
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "sg-${var.component}-lb"
+  }
+}
 resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
     connection {
@@ -133,6 +133,7 @@ resource "aws_lb" "lb" {
   name               = "${var.env}-${var.component}-lb"
   internal           = var.lb_internet_type == "public" ? false : true
   load_balancer_type = "application"
+  security_groups    = [aws_security_group.lb_security.id]
   subnets            = var.lb_subnets
   tags = {
     Environment = "${var.env}-${var.component}-lb"
