@@ -138,28 +138,12 @@ resource "aws_lb" "lb" {
     Environment = "${var.env}-${var.component}-lb"
   }
 }
-resource "aws_lb_listener" "frontend-http" {
+resource "aws_lb_listener" "listener" {
   count              = var.lb_req && var.lb_internet_type == "public" ? 1 : 0
   load_balancer_arn = aws_lb.lb[0].arn
   port              = var.app_port
   protocol          = "HTTP"
-  default_action {
-    type = "redirect"
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
-resource "aws_lb_listener" "frontend-https" {
-  count              = var.lb_req && var.lb_internet_type == "public" ? 1 : 0
-  load_balancer_arn = aws_lb.lb[0].arn
-  port              = 443
-  protocol          = "HTTPs"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
-  default_action {
+    default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.target[0].arn
   }
