@@ -2,12 +2,7 @@ resource "aws_security_group" "security" {
   name        = "security-${var.component}-${var.env}"
   description = "security-${var.component}-${var.env}"
   vpc_id      = var.vpc_id
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    }
+
    ingress {
     from_port        = var.app_port
     to_port          = var.app_port
@@ -19,6 +14,12 @@ resource "aws_security_group" "security" {
     to_port          = 22
     protocol         = "TCP"
     cidr_blocks      = var.bastion_nodes
+  }
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
   }
   tags = {
     Name = "sg-${var.component}"
@@ -70,8 +71,8 @@ resource "null_resource" "provisioner" {
       type     = "ssh"
       user     =  var.ssh_user
       password =  var.ssh_pass
-      host     = aws_instance.component.private_ip
-
+      host     = aws_instance.component.public_ip
+      port =    22
     }
     inline = [
       "sudo pip3.11 install ansible",
