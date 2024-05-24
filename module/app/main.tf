@@ -26,8 +26,8 @@ resource "aws_security_group" "security" {
 }
 resource "aws_security_group" "lb_security" {
   count = var.lb_req ? 1 : 0
-  name        = "security-${var.component}-${var.env}"
-  description = "security-${var.component}-${var.env}"
+  name        = "security-${var.component}-${var.env}-lb"
+  description = "security-${var.component}-${var.env}-lb"
   vpc_id      = var.vpc_id
     ingress {
     from_port        = var.app_port
@@ -42,7 +42,7 @@ resource "aws_security_group" "lb_security" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "sg-${var.component}"
+    Name = "sg-${var.component}-lb"
   }
 }
 resource "aws_instance" "component" {
