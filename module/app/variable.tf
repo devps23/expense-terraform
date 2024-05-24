@@ -18,15 +18,15 @@ variable "lb_req"{
 variable "lb_subnets" {
   default = null
 }
-variable "certificate_arn"{
-  default = null
-}
+//variable "certificate_arn"{
+//  default = null
+//}
 variable "app_port" {
   default = null
 }
-variable "bastion_nodes" {}
-variable "out_sg_app_port_inst" {
-  default = []
-}
+//variable "bastion_nodes" {}
+//variable "out_sg_app_port_inst" {
+//  default = []
+//}
 
 
