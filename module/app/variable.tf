@@ -6,7 +6,7 @@ variable "subnets" {}
 variable "ssh_user"{}
 variable "ssh_pass"{}
 variable "add_sg_app_port" {
-  default = []
+  default = null
 }
 variable "lb_tg_group" {
   default = false
