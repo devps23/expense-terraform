@@ -153,5 +153,25 @@ Rajesh DevOps
 
 frontend --public subnets outside world(DNS records)
 backend --- private subnets(internal dns records)
+first add all the server ip address to security group
+then which server needs to access load balancer for that we can create
+another security group with the name as load balancer.
+***************************************************************************************************************
+how to access the application outside?
+======================================
+Step1: here target group is an instance
+========================================
+By using load balancer we can access the application outside,here loadbalancer is a device
+1.first connect this loadbalancer from public subnets to frontend subnets
+pass this public subnets through modules and can access in an app modules
+add these public subnets in load balancer.
+add port and protocol to security group who will access the load balancer
+2.so frontend having public subnets , through this public subnets can able to access outside.
+3.create a target group
+4.attach this target group
+5.create load balancer
+6.create a listener and forward target group to load balancer
+7.add server ip address to security group
+8.add one more security group for load balancer which ip server can able to access outside
 
 

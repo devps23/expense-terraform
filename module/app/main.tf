@@ -3,16 +3,10 @@ resource "aws_security_group" "security" {
   description = "security-${var.component}-${var.env}"
   vpc_id      = var.vpc_id
   ingress {
-    from_port        = 22
-    to_port          = 22
+    from_port        = 0
+    to_port          = 0
     protocol         = "-1"
-    cidr_blocks      = var.bastion_nodes
-  }
-  ingress {
-    from_port        = var.app_port
-    to_port          = var.app_port
-    protocol         = "-1"
-    cidr_blocks      = var.add_sg_app_port
+    cidr_blocks      = ["0.0.0.0/0"]
   }
   egress {
     from_port        = 0
@@ -24,26 +18,6 @@ resource "aws_security_group" "security" {
     Name = "sg-${var.component}"
   }
 }
-//resource "aws_security_group" "lb_security" {
-//  name        = "security-${var.component}-${var.env}"
-//  description = "security-${var.component}-${var.env}"
-//  vpc_id      = var.vpc_id
-//    ingress {
-//    from_port        = var.app_port
-//    to_port          = var.app_port
-//    protocol         = "-1"
-//    cidr_blocks      = var.add_sg_app_port
-//  }
-//  egress {
-//    from_port        = 0
-//    to_port          = 0
-//    protocol         = "-1"
-//    cidr_blocks      = ["0.0.0.0/0"]
-//  }
-//  tags = {
-//    Name = "sg-${var.component}"
-//  }
-//}
 
 resource "aws_instance" "component" {
   ami = data.aws_ami.ami.image_id
@@ -79,13 +53,13 @@ resource "null_resource" "provisioner" {
     ]
   }
 }
-
 resource "aws_route53_record" "route" {
-  name = "${var.component}-${var.env}.pdevops72.online"
-  type = "A"
-  zone_id = "Z09583601MY3QCL7AJKBT"
-  records = [aws_instance.component.private_ip]
-  ttl = 30
+  count              = var.lb_req ? 0: 1
+  name               = "${var.component}-${var.env}.pdevops72.online"
+  type               = "A"
+  zone_id            = "Z09583601MY3QCL7AJKBT"
+  records            = [aws_instance.component.private_ip]
+  ttl                = 30
 }
 resource "aws_route53_record" "route-lb-dns" {
   count              = var.lb_req ? 1 : 0
