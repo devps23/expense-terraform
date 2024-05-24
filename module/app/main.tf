@@ -3,10 +3,16 @@ resource "aws_security_group" "security" {
   description = "security-${var.component}-${var.env}"
   vpc_id      = var.vpc_id
   ingress {
-    from_port        = 0
-    to_port          = 0
+    from_port        = 22
+    to_port          = 22
     protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = var.bastion_nodes
+  }
+  ingress {
+    from_port        = var.app_port
+    to_port          = var.app_port
+    protocol         = "-1"
+    cidr_blocks      = var.add_sg_app_port
   }
   egress {
     from_port        = 0
@@ -18,6 +24,26 @@ resource "aws_security_group" "security" {
     Name = "sg-${var.component}"
   }
 }
+//resource "aws_security_group" "lb_security" {
+//  name        = "security-${var.component}-${var.env}"
+//  description = "security-${var.component}-${var.env}"
+//  vpc_id      = var.vpc_id
+//    ingress {
+//    from_port        = var.app_port
+//    to_port          = var.app_port
+//    protocol         = "-1"
+//    cidr_blocks      = var.add_sg_app_port
+//  }
+//  egress {
+//    from_port        = 0
+//    to_port          = 0
+//    protocol         = "-1"
+//    cidr_blocks      = ["0.0.0.0/0"]
+//  }
+//  tags = {
+//    Name = "sg-${var.component}"
+//  }
+//}
 
 resource "aws_instance" "component" {
   ami = data.aws_ami.ami.image_id

@@ -5,7 +5,7 @@ variable "vpc_id" {}
 variable "subnets" {}
 variable "ssh_user"{}
 variable "ssh_pass"{}
-//variable "add_sg_app_port_inst" {}
+variable "add_sg_app_port" {}
 variable "lb_tg_group" {
   default = false
 }
@@ -24,7 +24,7 @@ variable "lb_subnets" {
 variable "app_port" {
   default = null
 }
-//variable "bastion_nodes" {}
+variable "bastion_nodes" {}
 //variable "out_sg_app_port_inst" {
 //  default = []
 //}
