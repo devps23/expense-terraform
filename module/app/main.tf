@@ -10,8 +10,8 @@ resource "aws_security_group" "security" {
 //    cidr_blocks      = var.add_sg_app_port_inst
 //     }
   ingress {
-    from_port        = 0
-    to_port          = 0
+    from_port        = var.app_port
+    to_port          = var.app_port
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
   }
@@ -95,60 +95,59 @@ resource "aws_route53_record" "route" {
   records = [aws_instance.component.private_ip]
   ttl = 30
 }
-//resource "aws_route53_record" "route-lb-dns" {
-//  count              = var.lb_req ? 1 : 0
-//  name = "lb-${var.component}-${var.env}.pdevops72.online"
-//  type = "CNAME"
-//  zone_id = "Z09583601MY3QCL7AJKBT"
-//  records = [aws_lb.lb[0].dns_name]
-//  ttl = 30
-//}
-//resource "aws_lb_target_group" "target" {
-//  count = var.lb_tg_group ? 1 : 0
-//  name     = "${var.env}-${var.component}-tg"
-//  port     = 80
-//  protocol = "HTTP"
-//  vpc_id   = var.vpc_id
-//  deregistration_delay = 2
-//  health_check {
-//     healthy_threshold   = 2
-//      interval           = 5
-//      path               = "/health"
-//      port               = var.app_port
-//     unhealthy_threshold = 2
-//     timeout             = 4
-//  }
-//  tags = {
-//    Name = "${var.env}-${var.component}-tg"
-//  }
-//}
-//resource "aws_lb_target_group_attachment" "tg-attachment" {
-//  count            = var.lb_tg_group ? 1 : 0
-//  target_group_arn = aws_lb_target_group.target[0].arn
-//  target_id        = aws_instance.component.id
-//  port             = 80
-//}
-//resource "aws_lb" "lb" {
-//  count              = var.lb_req ? 1 : 0
-//  name               = "${var.env}-${var.component}-lb"
-//  internal           = var.lb_internet_type == "public" ? false : true
-//  load_balancer_type = "application"
-//  security_groups    = [aws_security_group.lb_security[0].id]
-//  subnets            = var.lb_subnets
-//  tags = {
-//    Environment = "${var.env}-${var.component}-lb"
-//  }
-//}
-//resource "aws_lb_listener" "listener" {
-//  count              = var.lb_req && var.lb_internet_type == "public" ? 1 : 0
-//  load_balancer_arn = aws_lb.lb[0].arn
-//  port              = var.app_port
-//  protocol          = "HTTP"
-//    default_action {
-//    type             = "forward"
-//    target_group_arn = aws_lb_target_group.target[0].arn
-//  }
-//}
+resource "aws_route53_record" "route-lb-dns" {
+  count              = var.lb_req ? 1 : 0
+  name = "lb-${var.component}-${var.env}.pdevops72.online"
+  type = "CNAME"
+  zone_id = "Z09583601MY3QCL7AJKBT"
+  records = [aws_lb.lb[0].dns_name]
+  ttl = 30
+}
+resource "aws_lb_target_group" "target" {
+  count = var.lb_tg_group ? 1 : 0
+  name     = "${var.env}-${var.component}-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = var.vpc_id
+  deregistration_delay = 2
+  health_check {
+     healthy_threshold   = 2
+      interval           = 5
+      path               = "/health"
+      port               = var.app_port
+     unhealthy_threshold = 2
+     timeout             = 4
+  }
+  tags = {
+    Name = "${var.env}-${var.component}-tg"
+  }
+}
+resource "aws_lb_target_group_attachment" "tg-attachment" {
+  count            = var.lb_tg_group ? 1 : 0
+  target_group_arn = aws_lb_target_group.target[0].arn
+  target_id        = aws_instance.component.id
+  port             = 80
+}
+resource "aws_lb" "lb" {
+  count              = var.lb_req ? 1 : 0
+  name               = "${var.env}-${var.component}-lb"
+  internal           = var.lb_internet_type == "public" ? false : true
+  load_balancer_type = "application"
+  subnets            = var.lb_subnets
+  tags = {
+    Environment = "${var.env}-${var.component}-lb"
+  }
+}
+resource "aws_lb_listener" "listener" {
+  count              = var.lb_req && var.lb_internet_type == "public" ? 1 : 0
+  load_balancer_arn = aws_lb.lb[0].arn
+  port              = var.app_port
+  protocol          = "HTTP"
+    default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.target[0].arn
+  }
+}
 
 
 
