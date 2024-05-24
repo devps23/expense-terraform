@@ -17,7 +17,7 @@ resource "aws_security_group" "security" {
   ingress {
     from_port        = 22
     to_port          = 22
-    protocol         = "-1"
+    protocol         = "TCP"
     cidr_blocks      = var.bastion_nodes
   }
   tags = {
