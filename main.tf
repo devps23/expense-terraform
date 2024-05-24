@@ -15,7 +15,7 @@ module "frontend" {
   ssh_pass = var.ssh_pass
   bastion_nodes = var.bastion_nodes
   add_sg_app_port = var.public-subnets
-  access_sg_app_port = var.public-subnets
+  access_sg_app_port = ["0.0.0.0/0"]
 }
 module "backend" {
   depends_on = [module.mysql]
