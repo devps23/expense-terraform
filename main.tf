@@ -45,6 +45,7 @@ module "mysql" {
   ssh_pass = var.ssh_pass
   app_port = 3306
   bastion_nodes = var.bastion_nodes
+  add_sg_app_port = var.db-subnets
 }
 module "vpc" {
   source = "./module/vpc"
