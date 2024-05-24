@@ -143,7 +143,7 @@ resource "aws_lb_listener" "listener" {
   load_balancer_arn = aws_lb.lb[0].arn
   port              = var.app_port
   protocol          = "HTTP"
-  default_action {
+    default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.target[0].arn
   }

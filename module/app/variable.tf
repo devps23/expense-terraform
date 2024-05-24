@@ -24,9 +24,7 @@ variable "certificate_arn"{
 variable "app_port" {
   default = null
 }
-variable "bastion_nodes" {
-  default = []
-}
+variable "bastion_nodes" {}
 variable "out_sg_app_port_inst" {
   default = []
 }
