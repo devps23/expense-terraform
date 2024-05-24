@@ -12,7 +12,7 @@ variable "default_route-table_id"{}
 variable "bastion_nodes"{}
 variable "ssh_user"{}
 variable "ssh_pass"{}
-variable "add_sg_app_port" {}
+
 
 
 
