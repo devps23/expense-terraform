@@ -13,4 +13,4 @@ default_route-table_id= "rtb-0a2e9ff93585c96fd"
 token = "hvs.jUJeWSfOihA8RVtnhx9FbHLi"
 ssh_user = "ec2-user"
 ssh_pass = "DevOps321"
-bastion_nodes = ["172.31.36.30/32"]
+bastion_nodes = ["172.31.39.175/32"]
