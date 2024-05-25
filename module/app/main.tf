@@ -25,7 +25,7 @@ resource "aws_security_group" "security" {
   }
 }
 resource "aws_security_group" "lb_security" {
-  count       = var.lb_req ? 1 : 0
+  count       = var.lb_req && var.lb_internet_type == "public" ? 1 : 0
   name        = "security-${var.component}-${var.env}-lb"
   description = "security-${var.component}-${var.env}-lb"
   vpc_id      = var.vpc_id
@@ -85,7 +85,8 @@ resource "null_resource" "provisioner" {
   }
 }
 resource "aws_route53_record" "route" {
-  name               = "${var.component}-${var.env}.pdevops72.online"
+  count              = var.lb_req ? 0 : 1
+  name               = "${var.component}-${var.env}"
   type               = "A"
   zone_id            = "Z09583601MY3QCL7AJKBT"
   records            = [aws_instance.component.private_ip]
@@ -93,7 +94,7 @@ resource "aws_route53_record" "route" {
 }
 resource "aws_route53_record" "route-lb-dns" {
   count              = var.lb_req ? 1 : 0
-  name               = "lb-${var.component}-${var.env}.pdevops72.online"
+  name               = "lb-${var.component}-${var.env}"
   type               = "CNAME"
   zone_id            = "Z09583601MY3QCL7AJKBT"
   records            = [aws_lb.lb[0].dns_name]
