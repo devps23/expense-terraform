@@ -58,6 +58,11 @@ resource "aws_instance" "component" {
         spot_instance_type             = "persistent"
       }
     }
+  lifecycle {
+    ignore_changes = [
+      ami
+    ]
+  }
   tags = {
     Name = var.component
     monitor= "yes"
