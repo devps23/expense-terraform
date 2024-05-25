@@ -12,7 +12,7 @@ resource "aws_security_group" "security" {
     from_port        = var.app_port
     to_port          = var.app_port
     protocol         = "TCP"
-    cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = var.add_sg_app_port
   }
   egress {
     from_port        = 0
@@ -85,7 +85,6 @@ resource "null_resource" "provisioner" {
   }
 }
 resource "aws_route53_record" "route" {
-  count              = var.lb_req ? 0 : 1
   name               = "${var.component}-${var.env}.pdevops72.online"
   type               = "A"
   zone_id            = "Z09583601MY3QCL7AJKBT"
