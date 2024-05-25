@@ -62,11 +62,11 @@ resource "aws_instance" "component" {
     Name = var.component
     monitor= "yes"
   }
-  lifecycle {
-    ignore_changes = [
-      ami
-    ]
-  }
+//  lifecycle {
+//    ignore_changes = [
+//      ami
+//    ]
+//  }
 }
 resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
