@@ -24,27 +24,27 @@ resource "aws_security_group" "security" {
     Name = "sg-${var.component}"
   }
 }
-//resource "aws_security_group" "lb_security" {
-//  count       = var.lb_req ? 1 : 0
-//  name        = "security-${var.component}-${var.env}-lb"
-//  description = "security-${var.component}-${var.env}-lb"
-//  vpc_id      = var.vpc_id
-//   ingress {
-//    from_port        = var.app_port
-//    to_port          = var.app_port
-//    protocol         = "TCP"
-//    cidr_blocks      = var.access_sg_app_port
-//  }
-//  egress {
-//    from_port        = 0
-//    to_port          = 0
-//    protocol         = "-1"
-//    cidr_blocks      = ["0.0.0.0/0"]
-//  }
-//  tags = {
-//    Name = "sg-${var.component}-lb"
-//  }
-//}
+resource "aws_security_group" "lb_security" {
+  count       = var.lb_req ? 1 : 0
+  name        = "security-${var.component}-${var.env}-lb"
+  description = "security-${var.component}-${var.env}-lb"
+  vpc_id      = var.vpc_id
+   ingress {
+    from_port        = var.app_port
+    to_port          = var.app_port
+    protocol         = "TCP"
+    cidr_blocks      = var.access_sg_app_port
+  }
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "sg-${var.component}-lb"
+  }
+}
 
 resource "aws_instance" "component" {
   ami = data.aws_ami.ami.image_id
@@ -130,7 +130,7 @@ resource "aws_lb" "lb" {
   internal           = var.lb_internet_type == "public" ? false : true
   load_balancer_type = "application"
   subnets            = var.lb_subnets
-  security_groups    = [aws_security_group.security.id]
+  security_groups    = [aws_security_group.lb_security[0].id]
   tags = {
     Environment      = "${var.env}-${var.component}-lb"
   }
