@@ -85,6 +85,7 @@ resource "null_resource" "provisioner" {
   }
 }
 resource "aws_route53_record" "route" {
+  count              = var.lb_req ? 0 : 1
   name               = "${var.component}-${var.env}.pdevops72.online"
   type               = "A"
   zone_id            = "Z09583601MY3QCL7AJKBT"
