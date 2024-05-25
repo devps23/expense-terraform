@@ -5,7 +5,7 @@ module "frontend" {
   component = "frontend"
   env = var.env
   vpc_id = module.vpc.vpc_id
-  subnets = module.vpc.db_subnets
+  subnets = module.vpc.frontend_subnets
   lb_tg_group  = true
   lb_internet_type = "public"
   lb_req = true
