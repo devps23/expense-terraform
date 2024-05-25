@@ -42,7 +42,7 @@ resource "aws_security_group" "security" {
 //    cidr_blocks      = ["0.0.0.0/0"]
 //  }
 //  tags = {
-//    Name = "sg-${var.component}"
+//    Name = "sg-${var.component}-lb"
 //  }
 //}
 
@@ -62,11 +62,11 @@ resource "aws_instance" "component" {
     Name = var.component
     monitor= "yes"
   }
-//  lifecycle {
-//    ignore_changes = [
-//      ami
-//    ]
-//  }
+  lifecycle {
+    ignore_changes = [
+      ami
+    ]
+  }
 }
 resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
