@@ -26,7 +26,7 @@ module "backend" {
   ssh_pass = var.ssh_pass
   env = var.env
   vpc_id = module.vpc.vpc_id
-  subnets = module.vpc.db_subnets
+  subnets = module.vpc.backend_subnets
   lb_tg_group = true
   lb_internet_type = "private"
   lb_req = true
