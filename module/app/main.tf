@@ -58,16 +58,15 @@ resource "aws_instance" "component" {
         spot_instance_type             = "persistent"
       }
     }
+    tags = {
+    Name = var.component
+    monitor= "yes"
+  }
   lifecycle {
     ignore_changes = [
       ami
     ]
   }
-  tags = {
-    Name = var.component
-    monitor= "yes"
-  }
-
 }
 resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
