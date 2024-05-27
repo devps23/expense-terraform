@@ -14,4 +14,4 @@ token = "hvs.jUJeWSfOihA8RVtnhx9FbHLi"
 ssh_user = "ec2-user"
 ssh_pass = "DevOps321"
 bastion_nodes = ["172.31.39.175/32"]
-token = "hvs.euEam4HUc3gK3ONTmkrZIofp"
+
