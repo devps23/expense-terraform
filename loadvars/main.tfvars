@@ -10,7 +10,6 @@ availability_zone = ["us-east-1a","us-east-1b"]
 default_vpc_id = "vpc-02a94ee8944923438"
 default_vpc_cidr = "172.31.0.0/16"
 default_route-table_id= "rtb-0a2e9ff93585c96fd"
-token = "hvs.jUJeWSfOihA8RVtnhx9FbHLi"
 ssh_user = "ec2-user"
 ssh_pass = "DevOps321"
 bastion_nodes = ["172.31.39.175/32"]
