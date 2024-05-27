@@ -16,6 +16,7 @@ module "frontend" {
   bastion_nodes = var.bastion_nodes
   add_sg_app_port = var.public-subnets
   access_sg_app_port = ["0.0.0.0/0"]
+
 }
 module "backend" {
   depends_on = [module.mysql]
@@ -24,6 +25,7 @@ module "backend" {
   component = "backend"
   ssh_user = var.ssh_user
   ssh_pass = var.ssh_pass
+  token =var.token
   env = var.env
   vpc_id = module.vpc.vpc_id
   subnets = module.vpc.backend_subnets
