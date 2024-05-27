@@ -16,6 +16,7 @@ module "frontend" {
   bastion_nodes = var.bastion_nodes
   add_sg_app_port = var.public-subnets
   access_sg_app_port = ["0.0.0.0/0"]
+  token = var.token
 
 }
 module "backend" {
@@ -50,6 +51,7 @@ module "mysql" {
   app_port = 3306
   bastion_nodes = var.bastion_nodes
   add_sg_app_port = var.backend-subnets
+  token = var.token
 }
 module "vpc" {
   source = "./module/vpc"
