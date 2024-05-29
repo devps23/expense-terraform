@@ -72,14 +72,15 @@ resource "null_resource" "provisioner" {
   provisioner "remote-exec" {
     connection {
       type         = "ssh"
-      user         =  jsondecode(data.vault_generic_secret.vault-secrets.data_json).ansible_username
+      user         =  jsondecode(data.vault_generic_secret.vault-secrets.data_json).ansible_user
       password     =  jsondecode(data.vault_generic_secret.vault-secrets.data_json).ansible_password
       host         = aws_instance.component.private_ip
       port         = 22
     }
     inline = [
       "sudo pip3.11 install ansible",
-      "ansible-pull -i localhost, -U https://github.com/devps23/expense-ansible expense.yml -e env=${var.env} -e component_name=${var.component}"
+      "ansible-pull -i localhost. -U https://github.com/devps23/expense-ansible get_secrets_vault.yml -e env=${var.env} -e componente_name=${var.component} -e vault_token=${var.vault_token}"
+      "ansible-pull -i localhost, -U https://github.com/devps23/expense-ansible expense.yml -e env=${var.env} -e component_name=${var.component} -e @secrets.json -e app.json"
 
     ]
   }
