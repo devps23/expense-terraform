@@ -20,7 +20,7 @@ module "frontend" {
 
 }
 module "backend" {
-  depends_on = [module.mysql]
+  depends_on = [module.rds]
   source = "./module/app"
   instance_type = var.instance_type
   component = "backend"
@@ -39,20 +39,35 @@ module "backend" {
   add_sg_app_port = concat(var.frontend-subnets,var.backend-subnets)
   access_sg_app_port = var.frontend-subnets
   }
-module "mysql" {
-  source = "./module/app"
-  instance_type = var.instance_type
-  component = "mysql"
+module "rds"{
+  source = "./module/rds"
   env = var.env
+  subnet_ids = module.vpc.backend_subnets
+  engine = "mysql"
+  engine_version = "8.0.36"
+  component = "rds"
+  allocated_storage = 20
+  family = "mysql8.0"
+  instance_class = "db.t3.micro"
+  storage_type = "gp3"
   vpc_id = module.vpc.vpc_id
-  subnets = module.vpc.db_subnets
-  ssh_user = var.ssh_user
-  ssh_pass = var.ssh_pass
-  app_port = 3306
-  bastion_nodes = var.bastion_nodes
-  add_sg_app_port = var.backend-subnets
-  vault_token = var.vault_token
+  access_sg_app_port = var.backend-subnets
+  skip_final_snapshot = true
 }
+# module "mysql" {
+#   source = "./module/app"
+#   instance_type = var.instance_type
+#   component = "mysql"
+#   env = var.env
+#   vpc_id = module.vpc.vpc_id
+#   subnets = module.vpc.db_subnets
+#   ssh_user = var.ssh_user
+#   ssh_pass = var.ssh_pass
+#   app_port = 3306
+#   bastion_nodes = var.bastion_nodes
+#   add_sg_app_port = var.backend-subnets
+#   vault_token = var.vault_token
+# }
 module "vpc" {
   source = "./module/vpc"
   env = var.env
