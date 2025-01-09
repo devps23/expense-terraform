@@ -30,9 +30,9 @@ resource "aws_security_group" "lb_security" {
   description = "security-${var.component}-${var.env}-lb"
   vpc_id      = var.vpc_id
    ingress {
-    from_port        = var.app_port
-    to_port          = var.app_port
-    protocol         = "TCP"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
     cidr_blocks      = var.access_sg_app_port
   }
   egress {
